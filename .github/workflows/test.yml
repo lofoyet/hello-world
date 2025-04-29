@@ -8,11 +8,15 @@ on:
         description: name of Dockerfile to build image based off of
         default: 'Dockerfile-runner-runner'
         required: true
+      runner:
+        description: runner name
+        default: 'ubuntu-22.04'
+        required: true
 
 jobs:
   run_test:
     name: Job
-    runs-on: ubuntu-22.04 
+    runs-on: ${{ inputs.runner }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -23,28 +27,3 @@ jobs:
 
       - name: who am i in the runner?
         run: bash ./test.sh
-
-      - name: build docker
-        run: |
-          DOCKER_BUILDKIT=1 docker image build \
-            --load -t test-image:latest \
-            --progress=plain \
-            --platform=linux/amd64 -f ${{ inputs.dockerfile }} .
-
-      - name: docker user
-        run: |
-          docker run \
-            --rm \
-            --entrypoint /bin/bash \
-            test-image:latest \
-            ./test.sh
-
-      - name: docker mkdir touch
-        run: |
-          docker run \
-            --rm \
-            --entrypoint /bin/bash \
-            -v `pwd`:`pwd` \
-            -w `pwd` \
-            test-image:latest \
-            ./mkdir.sh

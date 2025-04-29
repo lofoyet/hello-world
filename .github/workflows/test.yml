@@ -6,7 +6,7 @@ on:
     inputs:
       dockerfile:
         description: name of Dockerfile to build image based off of
-        default: 'Dockerfile-runner-docker'
+        default: 'Dockerfile-runner-runner'
         required: true
 
 jobs:

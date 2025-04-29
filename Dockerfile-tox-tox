@@ -19,11 +19,18 @@ RUN yum install -y \
       zlib-devel bzip2 bzip2-devel
 RUN yum groupinstall -y "Development Tools"
 
-COPY test.sh ./
-COPY mkdir.sh ./
-
 RUN groupadd -g 1000 tox
 RUN useradd -u 1000 -g tox tox
 
-USER tox
 WORKDIR /home/tox
+
+COPY test.sh ./
+COPY mkdir.sh ./
+
+RUN chown -R tox:tox mkdir.sh
+RUN chown -R tox:tox test.sh
+
+USER tox
+
+RUN chmod 777 mkdir.sh
+RUN chmod 777 test.sh

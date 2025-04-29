@@ -44,6 +44,7 @@ jobs:
           docker run \
             --rm \
             --entrypoint /bin/bash \
+            -v `pwd`:`pwd` \
+            -w `pwd` \
             test-image:latest \
             ./mkdir.sh
-

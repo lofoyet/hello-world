@@ -1,2 +1,3 @@
 mkdir test
-touch test/test.txt
+echo "hello world!" test/test.txt
+cat test/test.txt

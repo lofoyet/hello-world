@@ -17,5 +17,4 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: who am i in the runner?
-        working-directory: "./airflow"
         run: bash ./test.sh

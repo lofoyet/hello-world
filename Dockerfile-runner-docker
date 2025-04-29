@@ -27,8 +27,8 @@ WORKDIR /home/runner
 COPY test.sh ./
 COPY mkdir.sh ./
 
-RUN chown -R runner:runner mkdir.sh
-RUN chown -R runner:runner test.sh
+RUN chown -R runner:docker mkdir.sh
+RUN chown -R runner:docker test.sh
 
 USER runner
 

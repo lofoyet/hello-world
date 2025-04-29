@@ -19,6 +19,8 @@ RUN yum install -y \
       zlib-devel bzip2 bzip2-devel
 RUN yum groupinstall -y "Development Tools"
 
+COPY test.sh ./
+COPY mkdir.sh ./
 
 RUN groupadd -g 1001 runner
 RUN useradd -u 1001 -g runner runner

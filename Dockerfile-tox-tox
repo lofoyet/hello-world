@@ -19,6 +19,8 @@ RUN yum install -y \
       zlib-devel bzip2 bzip2-devel
 RUN yum groupinstall -y "Development Tools"
 
+COPY test.sh ./
+COPY mkdir.sh ./
 
 RUN groupadd -g 1000 tox
 RUN useradd -u 1000 -g tox tox

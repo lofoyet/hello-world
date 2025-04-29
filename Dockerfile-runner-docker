@@ -1,0 +1,7 @@
+FROM amazoncorretto:11
+
+RUN groupadd -g 128 docker
+RUN useradd -u 1001 -g docker runner
+
+USER runner
+WORKDIR /home/runner

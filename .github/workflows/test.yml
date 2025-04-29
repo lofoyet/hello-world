@@ -3,6 +3,11 @@
 name: Manual
 on:
   workflow_dispatch:
+    inputs:
+      dockerfile:
+        description: name of Dockerfile to build image based off of
+        default: 'Dockerfile-runner-docker'
+        required: true
 
 jobs:
   run_test:
@@ -18,3 +23,29 @@ jobs:
 
       - name: who am i in the runner?
         run: bash ./test.sh
+
+      - name: build docker
+        run: |
+          DOCKER_BUILDKIT=1 docker image build \
+            --load -t test-image:latest \
+            --progress=plain \
+            --platform=linux/amd64 -f Dockerfile-runner-docker .
+
+      - name: docker user
+        run: |
+          docker run \
+            --rm \
+            --entrypoint /bin/bash \
+            -v "./test.sh":./test.sh \
+            test-image:latest \
+            ./test.sh
+
+      - name: docker mkdir touch
+        run: |
+          docker run \
+            --rm \
+            --entrypoint /bin/bash \
+            -v "./mkdir.sh":./mkdir.sh \
+            test-image:latest \
+            ./mkdir.sh
+

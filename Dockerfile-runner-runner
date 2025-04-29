@@ -1,0 +1,7 @@
+FROM amazoncorretto:11
+
+RUN groupadd -g 1001 runner
+RUN useradd -u 1001 -g runner runner
+
+USER runner
+WORKDIR /home/runner

@@ -1,11 +1,8 @@
-echo "OS info"
-cat /etc/os-release
+pip --version > pip.log
+cat pip.log
 
-echo "current user"
-id
+man zip > zip.log
+cat zip.log
 
-echo "group info"
-cut -d: -f1,3 /etc/group
-
-echo "user info"
-cut -d: -f1,3 /etc/passwd
+man make > make.log
+cat make.log

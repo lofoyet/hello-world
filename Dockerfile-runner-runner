@@ -1,5 +1,25 @@
 FROM amazoncorretto:11
 
+RUN yum -q clean expire-cache && yum check-update -y ignore_retcode=False
+RUN yum install -y \
+      git-core \
+      libmpc-devel mpfr-devel gmp-devel \
+      gcc-gfortran gcc gcc-c++ \
+      blas-devel lapack-devel \
+      @development \
+      findutils \
+      libffi-devel \
+      openssl-devel cyrus-sasl-devel \
+      postgresql-devel \
+      python-devel \
+      readline-devel \
+      sqlite sqlite-devel \
+      tar xz xz-devel \
+      wget \
+      zlib-devel bzip2 bzip2-devel
+RUN yum groupinstall -y "Development Tools"
+
+
 RUN groupadd -g 1001 runner
 RUN useradd -u 1001 -g runner runner
 
